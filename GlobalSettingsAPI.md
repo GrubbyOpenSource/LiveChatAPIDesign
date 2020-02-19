@@ -32,8 +32,8 @@
   |`id` | Guid  | | yes | N/A | | Id of the current item.  |
   | `name` | string  | N/A | yes |  | Name of the visitor. |
   | `email` | string  | N/A | N/A |  | Email of the visitor. |
-  | `numberOfVisits` | int  | N/A | N/A | 0 | The total number of web pages the visitor viewed on your website. |
-  | `numberOfChats` | int  | N/A | N/A | 0 | The total times of chats a visitor has made on your website from the first time to present. |
+  | `numberOfVisits` | integer  | N/A | N/A | 0 | The total number of web pages the visitor viewed on your website. |
+  | `numberOfChats` | integer  | N/A | N/A | 0 | The total times of chats a visitor has made on your website from the first time to present. |
   | `firstVisitTime` | datetime  | N/A | N/A |  | The time the visitor first visited a web page pasted with Comm100 Live Chat code. |
 
 ### Visitor Endpoints
@@ -111,7 +111,7 @@ the response is: [Visitor](#Visitor-Object) Object
   |`id` | Guid  | | yes | N/A | | Id of the current item.  |
   | `name` | string  | N/A | N/A |  | Name of the custom away status. |
   | `isSystem` | boolean  | N/A | N/A |  | Whether the custom away status is system or not. |
-  | `order` | int  | N/A | N/A | 0 | The order of the custom away status. |
+  | `order` | integer  | N/A | N/A | 0 | The order of the custom away status. |
 
 ### Custom Agent Away Status Endpoints
 
@@ -722,8 +722,8 @@ Data Mapping is represented as simple flat JSON objects with the following keys:
 
   | Name | Type | Read-only | Mandatory | Default | Description |
   | - | - | :-: | :-: | - |
-  | `attribute` | string  | no | yes | SSO attribute name. |
-  | `comm100FieldId` | Guid  | no | yes | Id of the Comm100 field. |
+  | `attribute` | string  | N/A | yes | SSO attribute name. |
+  | `comm100FieldId` | Guid  | N/A | yes | Id of the Comm100 field. |
 
 #### Campaign SSO Options Object
 
@@ -731,9 +731,9 @@ SignIn Options is represented as simple flat JSON objects with the following key
 
   | Name | Type | Read-only | Mandatory | Default | Description |
   | - | - | :-: | :-: | - |
-  | `campaignId` | Guid  | yes | no | Id of the campaign. |
-  | `signInOption` | string  | no | no | Type of the sign in, including `no`, `optional` and `required`. |
-  | `isPrechatFromSkipped` | boolean  | no | no | Whether the pre-chat form is skipped when visitors sign in. |
+  | `campaignId` | Guid  | yes | N/A | Id of the campaign. |
+  | `signInOption` | string  | N/A | N/A | Type of the sign in, including `no`, `optional` and `required`. |
+  | `isPrechatFromSkipped` | boolean  | N/A | N/A | Whether the pre-chat form is skipped when visitors sign in. |
 
 ### Visitor SSO Endpoints
 
@@ -893,3 +893,224 @@ Path Parameters
 ##### Response
 
 HTTP/1.1 204 No Content
+
+## Campaigns
+
+### Related Object Json Format
+
+#### Campaign Object
+
+  Campaign Object is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  |`id` | Guid  | | yes | N/A | | Id of the current item.  |
+  | `name` | string  | N/A | N/A |  | Name of the shift. |
+  | `description` | string  | N/A | N/A |  |  |
+
+#### Chat Button Object
+
+  Chat Button Object is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `type` | string | N/A | yes |  | Type of the button, including `adaptive`, `image` and `textLink`. |
+  | `isHideWhenOffline` | boolean | N/A | N/A |  | Whether the chat button is visible when no agent is online.`true` means that button is invisible. |
+  | `isDomainRestrictionEnabled` | boolean | N/A | N/A |  | Whether the domain restriction is enabled or not. |
+  | `allowedDomains` | string | N/A | N/A |  | An array of domains/urls, on which the chat button is visible. |
+  | `adaptiveButtonColor` | string | N/A | N/A |  | The theme color of the chat button, available when `type` is `adaptive`. |
+  | `adaptiveButtonIconType` | integer | N/A | N/A |  | Type of the chat button icon, including `1`, `2` , `3` and `4`, available when `type` is `adaptive`. |
+  | `adaptiveButtonOnlineIcon` | string | N/A | N/A |  | File key of the chat online button, available when `type` is `adaptive`. |
+  | `adaptiveButtonOfflineIcon` | string | N/A | N/A |  | File key of the chat offline button, available when `type` is `adaptive`. |
+  | `isImageButtonFloating` | boolean | N/A | N/A |  | Whether the image button is float or not, available when `type` is `image`. |
+  | `imageButtonPosition` | string | N/A | N/A |  | Position of the image button, including `centered`, `topLeft`, `topMiddle`, `topRight`, `bottomLeft`, `bottomMiddle`, `bottomRight`, `leftMiddle` and `rightMiddle`, available when `type` is `image`. |
+  | `imageButtonPositionMode` | string | N/A | N/A |  | Position mode of the image button, including `Basic` and `Advanced`, available when `type` is `image`. |
+  | `isImageButtonXOffsetByPixel` | boolean | N/A | N/A |  |                 available when `type` is `image`. |
+  | `imageButtonXOffset` | integer | N/A | N/A |  |  If Is XOffset By Pixel is True, it represents the offset pixel value of the X coordinate. If Is XOffset By Pixel is False, it represents the offset percentage value of the X coordinate, available when `type` is `image`. |
+  | `isImageButtonYOffsetByPixel` | boolean | N/A | N/A |  |                 available when `type` is `image`. |
+  | `imageButtonYOffset` | integer | N/A | N/A |  |  If Is YOffset By Pixel is True, it represents the offset pixel value of the Y coordinate. If Is YOffset By Pixel is False, it represents the offset percentage value of the Y coordinate, available when `type` is `image`. |
+  | `imageButtonImageSource` | string | N/A | N/A |  |  Type of the image source, including `fromGallery` or `fromMyComputer` |
+  | `imageButtonOnlineImage` | string | N/A | N/A |  | File key of the image online button, available when `type` is `image`. |
+  | `imageButtonOfflineImage` | string | N/A | N/A |  | File key of the image offline button, available when `type` is `image`. |
+  | `imageButtonTypeOnMobile` | string | N/A | N/A |  | The type of button on mobile device, including `text` and `image`, available when `type` is `image`. |
+  | `imageButtonColorOnMobile` | string | N/A | N/A |  |  |
+  | `imageButtonTextColorOnMobile` | string | N/A | N/A |  | The theme color of chatbutton on mobile device. |
+  | `imageButtonOnlineImageOnMobile` | string | N/A | N/A |  | The file key of image on mobile device when any agents is online. |
+  | `imageButtonOfflineImageOnMobile` | string | N/A | N/A |  | The file key of image on mobile device when no agent is online. |
+  | `imageButtonPositionOnMobile` | string | N/A | N/A |  | Position of the chat button on mobile device, including `bottomLeft`, `bottomMiddle`, `bottomRight`, `leftMiddle`, `RightMiddle`, `leftBottom` and `rightBottom`. |
+  | `imageButtonTypeOnMobile` | string | N/A | N/A |  | the content of the text link, available when `type` is `textLink`. |
+
+#### Chat Window Object
+
+  Chat Window Object is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `width` | integer | N/A | N/A |  |  |
+  | `height` | integer | N/A | N/A |  |  |
+  | `style` | string | N/A | yes |  |  Style of the window's theme, including `classic`, `circle` and `bubble`. |
+  | `color` | string | N/A | yes |  |  Color of the window's theme. |
+  | `type` | string | N/A | yes |   | Type of the chat window, including `embedded` and `popup`. |
+  | `headerType` | string | N/A | N/A |  |  Type of the header, including `agentInfo`, `bannerImage` and `avatarAndLogo` when `style` is `classic`. |
+  | `isAvatarDisplayed` | boolean | N/A | N/A |   | Whether the avatar of the agent is visible or not, available when  `headerType` is `agentInfo` or `avatarAndLogo`. |
+  | `isTitleDisplayed` | boolean | N/A | N/A |   | Whether the title of the agent is visible or not, available when `headerType` is `agentInfo`. |
+  | `isBioDisplayed` | boolean | N/A | N/A |   | Whether the bio of the agent is visible or not, available when `headerType` is `agentInfo`. |
+  | `isLogoDisplayed` | boolean | N/A | N/A |   | Whether the logo is visible or not, available when `headerType` is `avatarAndLogo`. |
+  | `logo` | string | N/A | N/A |  | File key of the logo. |
+  | `bannerImage` | string | N/A | N/A |  | File key of the banner image, available when `headerType` is `bannerImage`. |
+  | `isAvatarDisplayedWithMessage` | boolean | N/A | N/A   | | Whether the avatar of the agent is visible or not in the message body, available when `style` is `classic`or `simple`. |
+  | `isBackgroundDisplayed` | boolean | N/A | N/A |  |  Whether the texture and picture of the background is visible or not in the message body, available when `style` is `classic`or `simple`. |
+  | `backgroundTexture` | integer | N/A | N/A |  |  |
+  | `customCSSOfClassic` | string | N/A | N/A |  |  The content of custom css when  `style` is `classic`. |
+  | `customCSSOfCircle` | string | N/A | N/A |  |  The content of custom css when  `style` is `circle`. |
+  | `isTranscriptDownloadAllowed` | boolean | N/A | N/A |   | Whether the visitor can download the chat transcript. |
+  | `isTranscriptPrintAllowed` | boolean | N/A | N/A |   | Whether the visitor can print the chat transcript. |
+  | `isTranscriptSentToVisitors` | boolean | N/A | N/A |   | Whether the transcript send to visitor. |
+  | `isTranscriptSentFromCurrentAgentEmail` | boolean | N/A | N/A |   | Available when `isTranscriptDownloadAllowed` is true. |
+  | `fromEmailName` | string | N/A | N/A |  |  The from name for sending transcript email, available when `isTranscriptSentFromCurrentAgentEmail` is true. |
+  | `fromEmailAddress` | string | N/A | N/A |  |  The subject address for sending transcript email, available when `isTranscriptSentFromCurrentAgentEmail` is true. |
+  | `isSMTPServerCustomized` | boolean | N/A | N/A |   | Whether use custome SMTP server. |
+  | `customSMTPServer.fromName` | string | N/A | N/A |   |  |
+  | `customSMTPServer.fromEmail` | string | N/A | N/A |   |  |
+  | `customSMTPServer.mailServer` | string | N/A | N/A |   |  |
+  | `customSMTPServer.port` | integer | N/A | N/A |   |  |
+  | `customSMTPServer.encryptedType` | string | N/A | N/A |   | Including `none`, `SSL` and `TLS`.  |
+  | `customSMTPServer.IsAuthenticationRequired` | boolean | N/A | N/A |   |  |
+  | `customSMTPServer.username` | string | N/A | N/A |   |  |
+  | `customSMTPServer.password` | string | N/A | N/A |   |  |
+  | `isSwitchToOfflineMessageAllow` | boolean | N/A | N/A |   | Allow visitors to switch to Offline Message Window while waiting for chat. |
+  | `isFileSendAllow` | boolean | N/A | N/A |   | Whether the agent can send file or not. |
+  | `ifMarkUnreadMessage` | boolean | N/A | N/A |   |  |
+  | `isAudioChatEnabled` | boolean | N/A | N/A |   | Whether the agent can use audio chat. |
+  | `isVideoChatEnabled` | boolean | N/A | N/A |   | Whether the agent can use video chat. |
+  | `isBrowserPopupNotificationEnabled` | boolean | N/A | N/A |   | It is available for private server sites. For shared server clients, the push notification is disabled by default. |
+  | `ifEndChatWhenVisitorIsInactive` | boolean | N/A | N/A |   | Automatically end chats if visitors don't respond in period of time. |
+  | `minutesOfVisitorInactivity` | integer | N/A | N/A |  |  |
+  | `isTranscriptSentForArchiving` | boolean | N/A | N/A |  |  |
+  | `receivingEmailAddressesForArchivingTranscripts` | string | N/A | N/A |   |  |
+  | `emailSubjectForArchivingTranscripts` | string | N/A | N/A |   |  |
+  | `greetingMessage` | string | N/A | N/A |   |  |
+  | `isCustomJSEnabled:` | boolean | N/A | N/A |   |  |
+  | `customJS` | string | N/A | N/A |   |  |
+
+#### PreChat Object
+
+  PreChat Window Object is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `isEnable` | boolean | N/A | N/A |   | Whether the pre-chat is enabled or not. |
+  | `isTeamNameDisplayed` | boolean | N/A | N/A |   | Whether the team name is visible or not in the header. |
+  | `teamName` | string | N/A | N/A |  | The team name displayed in the header. |
+  | `isAgentAvatarDisplayed` | boolean | N/A | N/A   | | Whether the avatar of the agent is visible or not in the header. |
+  | `greetingMessage` | string | N/A | N/A |  |   |
+  | `socialMediaLogin` | string | N/A | N/A |  |  Including `none` and `facebook`. |
+  | `field` | [field](#Campaign-Form-Field-Object)[] | N/A | N/A |  | These System Fields are prebuilt and can’t be deleted: `name`, `email`, `phone`, `company`, `product service`, `department`, `ticket id`.  |
+  | `isVisitorInfoRecorded` | boolean | N/A | N/A | true | If remember visitor info collected from pre-chat form. |
+  | `formFieldLayoutStyle` | string | N/A | N/A |   | Including `leftofInput` and `aboveInput`. Available for Post Chat and Offline Message forms.  |
+
+#### Campaign Form Field Object
+
+  Campaign Form Field is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `id` | Guid | yes | N/A |   | Id of the current item. |
+  | `field` | [type](#Live-Chat-Field-Object) | N/A | N/A |   |  |
+  | `isVisible` | boolean | N/A | N/A |   | Whether the field is visible or not. |
+  | `isRequired` | boolean | N/A | N/A |   | Whether the field is required or not when submitting the form |
+  | `order` | integer | N/A | N/A |   | The order of the field. |
+  | `ratingGrade` | [type](#Rating-Grade-Object) | N/A | N/A |   |  |
+
+#### Rating Grade Object
+
+  Rating Grade is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `id` | Guid | yes | N/A | Id of the current item. |
+  | `grade` | integer | N/A | N/A |  |  |
+  | `label` | string | N/A | N/A |  |  |
+  | `isVisible` | boolean | N/A | N/A |  |  |
+
+#### Live Chat Field Object
+
+  Live Chat Field is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `id` | Guid | yes | N/A |  | Id of the current item. |
+  | `isSystem` | boolean | N/A | N/A |  | whether the field is system or not. |
+  | `name` | string | N/A | N/A |  |  |
+  | `type` | string | N/A | N/A |  | The [Live Chat Field Type](#Live-Chat-Field-Type) of the field. |
+  | `option` | [Live Chat Field Option](Live-Chat-Field-Option)[] | N/A | N/A |  | Live Chat Field Option, available whey Type is `radioBox`, `dropdownList`, `checkboxList`. |
+  | `leftText` | string | N/A | N/A |  | Available whey Type is NPS. |
+  | `rightText` | string | N/A | N/A |  | Available whey Type is NPS. |
+  | `optionGroup` | [Live Chat Field Option Group](Live-Chat-Field-Option-Group)[] | N/A | N/A |  | Live Chat Field Option Group, available whey Type is `checkboxListwithOptionGroups`. |
+
+#### Live Chat System Field
+
+  Live Chat System Field is one key of the following keys:
+
+  | System Field | Type | Only Available Forms | Is Required |
+  | - | - | :-: | - |
+  | `name` | Text Box | Name field, `Pre Chat Form` or `Offline Message Form` only. |
+  | `email` | Text Box | Email field, `Pre Chat Form` or `Offline Message Form` only. |
+  | `phone` | Text Box | Phone field, `Pre Chat Form` or `Offline Message Form` only. |
+  | `company` | Text Box | Company field, `Pre Chat Form` or `Offline Message Form` only. |
+  | `product service` | Dropdown List | Product and Service field, `Pre Chat Form` only. |
+  | `department` | Dropdown List | Department field, `Pre Chat Form` or `Offline Message Form` only. |
+  | `ticket id` | Text Box | Ticket field, `Pre Chat Form` or `Offline Message Form` only.  |
+  | `rating` | Rating | Rating field, `Post Chat Form` only. |
+  | `rating comment` | Text Area | Comments field, `Post Chat Form` only. |
+  | `subject` | Text Box | Subject field, `Offline Message Form` only. |
+  | `message` | Text Area | Content field, `Offline Message Form` only. |
+  | `attachment` | File | Attachment field, `Offline Message Form` only. |
+  | `category` | Dropdown List or Checkbox List with Groups  | category field , `agent wrap-up` only |
+  | `wrapup comment` | Text Area | comment field , `agent wrap-up` only |
+
+#### Live Chat Field Type
+
+  Live Chat Field Type is one key of the following keys:
+
+  | Name | Available Forms |
+  | - | :-: | - |
+  | `textBox` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up`   |
+  | `textArea` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up`   |
+  | `radioBox` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up`   |
+  | `checkbox` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up`   |
+  | `dropdownList` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up` |
+  | `checkboxList` | `Pre-Chat`, `Post Chat`, `Offline Message`, `Agent Wrap-Up` |
+  | `NPS` | `Post Chat`  |
+  | `file` | `Offline Message`   |
+  | `rating` | `Post Chat` |
+  | `checkboxListwithOptionGroups` | `Agent Wrap-Up`   |
+
+#### Live Chat Field Option
+
+  Live Chat Field Option is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `value` | string | N/A | N/A |  |  |
+  | `order` | integer | N/A | N/A |  |  |
+
+#### Live Chat Field Option Group
+
+  Live Chat Field Option Group is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `name` | string | N/A | N/A |  |  |
+  | `order` | integer | N/A | N/A |  |  |
+  | `option` | [Live Chat Field Option](Live-Chat-Field-Option)[]  | N/A | N/A |  |  |
+
+#### Post Chat Object
+
+  Post Chat Window Object is represented as simple flat JSON objects with the following keys:  
+
+  | Name | Type | Read-only For Put | Mandatory For Post | Default | Description |
+  | - | - | :-: | :-: | :-: | - |
+  | `isEnable` | boolean | N/A | N/A |   | Whether the pre-chat is enabled or not. |
+  | `field` | [field](#Campaign-Form-Field-Object)[] | N/A | N/A |  | These System Fields are prebuilt and can’t be deleted: `rating`, `rating comment`.  |
+  | `greetingMessage` | string | N/A | N/A |  |   |
